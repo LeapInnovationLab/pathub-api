@@ -14,6 +14,18 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+require 'simplecov'
+# SimpleCov.start 
+
+require 'simplecov-shield'
+SimpleCov::Formatter::ShieldFormatter.config[:precision] = 2
+SimpleCov.formatter =  SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::ShieldFormatter,
+  SimpleCov::Formatter::HTMLFormatter
+]
+SimpleCov.start 'rails'
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

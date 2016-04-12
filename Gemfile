@@ -44,5 +44,6 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
   gem 'simplecov', :require => false
-  gem 'simplecov-json', :require => false
+  # gem 'simplecov-json', :require => false
+  gem 'simplecov-shield'
 end
