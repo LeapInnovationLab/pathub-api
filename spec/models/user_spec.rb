@@ -48,15 +48,20 @@ RSpec.describe User, type: :model do
     end    
   end
 
+  context "# creating users" do
+    it 'saves basic user' do
+      user = create :user
+      expect(user).to be_persisted
+    end
 
-  it 'saves basic user' do
-    user = create :user
-    expect(user).to be_persisted
-  end
+    it 'saves facebook user' do
+      fb_user = create :fb_user
+      expect(fb_user).to be_persisted
+    end
 
-  it 'saves facebook user' do
-    fb_user = create :fb_user
-    expect(fb_user).to be_persisted
+    it 'assigns automatically a username' do
+      expect(user.username).not_to be_nil
+    end
   end
   
   context '# when following users' do

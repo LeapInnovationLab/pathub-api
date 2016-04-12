@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe UserFollow, :type => :model do
 
-  it { is_expected.to have_field(:occurred).of_type(Integer) }
+  # it { is_expected.to have_field(:occurred).of_type(Integer) }
 
-  it { is_expected.to belong_to(:followee).of_type(User).as_inverse_of(:user_followers) }
-  it { is_expected.to belong_to(:follower).of_type(User).as_inverse_of(:user_followings) }
+  # it { is_expected.to belong_to(:followee).of_type(User).as_inverse_of(:user_followers) }
+  # it { is_expected.to belong_to(:follower).of_type(User).as_inverse_of(:user_followings) }
 
-  it { is_expected.to validate_presence_of(:followee) }
-  it { is_expected.to validate_presence_of(:follower) }
-  it { is_expected.to validate_uniqueness_of(:followee).scoped_to(:follower_id) }
+  # it { is_expected.to validate_presence_of(:followee) }
+  # it { is_expected.to validate_presence_of(:follower) }
+  # it { is_expected.to validate_uniqueness_of(:followee).scoped_to(:follower_id) }
 
   context '# when user follows other users' do
     let(:u1) { create(:user) }

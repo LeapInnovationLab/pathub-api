@@ -66,12 +66,15 @@ class User
   
   # Validations
   validates_presence_of :first_name, :last_name, :on => :create
+  validates_uniqueness_of :username
+  validates_format_of :username, with: /\A[a-zA-Z0-9_]+\z/
   
   # Indexes
   index({email: 1},{unique: true})  
 
   # Hooks
   before_validation :friendly_password, if: 'password.nil? && provider.present? && uid.present?'
+  before_validation :generate_username
 
   # Overide this method when using ActiveJob for delayed jobs
   # def send_devise_notification(notification, *args)
@@ -144,6 +147,18 @@ class User
 
   def friendly_password
     self.password = Devise.friendly_token[0,20]
+  end
+
+  def generate_username
+    if self.username.nil?
+      uname = full_name.downcase.gsub /[^0-9A-Za-z]/, ''
+
+      found_similar = User.where(:username => /^#{uname}/i).only(:username).collect{|u| u.username}
+      last_num = found_similar.collect{|n| n.gsub(/^#{uname}/, '').to_i }.sort.last
+      uname.concat (last_num + 1).to_s  unless last_num.nil?
+
+      self.username = uname      
+    end
   end
 
 end
