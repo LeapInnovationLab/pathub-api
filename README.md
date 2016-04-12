@@ -1,4 +1,4 @@
-## PathHub
+## PathHub API
 
 
 Generate Mongoid Indexes

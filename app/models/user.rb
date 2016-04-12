@@ -1,14 +1,14 @@
 class User
   include Mongoid::Document
-  # include Occurred
+  include Mongoid::Timestamps::Created
+  include UserFollowings  
   # include ApiModel
   # include ActiveModel::SecurePassword
 
   # Include default devise modules. Others available are:
   # :rememberable, :trackable
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :validatable
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -37,8 +37,7 @@ class User
   ## Lockable
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
-  # field :locked_at,       type: Time
-  
+  # field :locked_at,       type: Time  
 
   ROLES = %i[admin member]
   
@@ -144,7 +143,7 @@ class User
   private
 
   def friendly_password
-    self.password = SecureRandom.hex(8)
+    self.password = Devise.friendly_token[0,20]
   end
 
 end

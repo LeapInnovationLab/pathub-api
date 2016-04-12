@@ -15,7 +15,13 @@ FactoryGirl.define do
       gender 'male'
       password nil
     end
-    
+
+    factory :user_with_topics do          
+      after(:create) do |user, evaluator|
+        create_list(:topic, 2, user: user)
+      end
+    end
+
   end  
 
 end
