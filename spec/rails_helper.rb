@@ -18,7 +18,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -41,4 +41,11 @@ RSpec.configure do |config|
 
   #devise
   config.include Devise::TestHelpers, :type => :controller
+
+  # remove carrierwave uploader files
+  config.after(:all) do
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads","#{Rails.root}/public/users"])
+    end
+  end
 end

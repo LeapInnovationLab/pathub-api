@@ -57,7 +57,7 @@ class User
   # field :password_digest, type: String
   # has_secure_password
 
-  # mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
   # has_many :auth_tokens, dependent: :destroy
   # has_many :posts, dependent: :destroy

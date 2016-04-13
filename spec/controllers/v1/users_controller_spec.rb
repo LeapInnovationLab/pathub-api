@@ -4,10 +4,10 @@ require 'shared_example_for_api'
 RSpec.describe V1::UsersController, type: :controller do
 
   describe 'POST #create' do
-    let(:user_attributes) { FactoryGirl.attributes_for :user, :brand_new }
+    let(:user_attributes) { { user: attributes_for(:user) } }
     
     context 'when is valid email and password' do
-      before { post :create, camelize_keys_for(user_attributes) }
+      before { post :create, camelize_keys_for( user_attributes) }
       
       it 'returns authentication token and user id' do
         uid = response.headers['X-QUESEE-USERID'] 
@@ -31,7 +31,8 @@ RSpec.describe V1::UsersController, type: :controller do
     end
 
     context 'when using facebook' do
-      let(:fb_user_attributes) {  FactoryGirl.attributes_for(:user_from_facebook, :brand_new) }
+      let(:fb_user_attributes) {  attributes_for(:fb_user) }
+
       before { post :create, camelize_keys_for(fb_user_attributes) }
 
       it 'returns authenciation token and user id' do

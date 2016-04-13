@@ -14,6 +14,7 @@ FactoryGirl.define do
       birthday '1978/05/27'
       gender 'male'
       password nil
+      avatar "http://lorempixel.com/150/150/people"
     end
 
     factory :user_with_topics do          

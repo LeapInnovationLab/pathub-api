@@ -55,7 +55,8 @@ RSpec.describe User, type: :model do
     end
 
     it 'saves facebook user' do
-      fb_user = create :fb_user
+      user_params = attributes_for :fb_user
+      fb_user = User.from_external(user_params)
       expect(fb_user).to be_persisted
     end
 

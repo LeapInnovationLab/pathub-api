@@ -21,7 +21,12 @@ gem 'puma'
 
 gem 'devise', git: 'git@github.com:plataformatec/devise.git'
 gem 'mongoid', git: 'https://github.com/estolfo/mongoid.git', branch: 'MONGOID-4218-rails-5'
-gem 'swagger-docs'
+# gem 'swagger-docs'
+gem 'apipie-rails'
+gem 'carrierwave'
+gem 'carrierwave-mongoid'
+gem 'fog'
+gem 'rmagick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
